@@ -8,7 +8,7 @@ public class Main {
     }
 
     public static boolean check(String input) {
-        for(int i = 1; i < input.length() - 1; i++) {
+        for(int i = 1; i < input.length(); i++) {
             if(input.charAt(i-1) != input.charAt(i)) {
                 return false;
             }
