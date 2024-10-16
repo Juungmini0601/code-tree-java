@@ -26,7 +26,7 @@ public class Main {
             return false;
         }
 
-        for(int i = 0; i < a.length - b.length; i++) {
+        for(int i = 0; i < a.length - b.length + 1; i++) {
             if(sameArray(a, b, i)) {
                 return true;
             }
