@@ -12,17 +12,17 @@ public class Main {
             String dir = sc.next();
 
             if(dir.equals("R")) {
-                while(distance > 1) {
-                    cur++;
-                    arr[cur]++;
-                    distance--;
+                int next = cur + distance;
+                for(int j = cur; j < next; j++) {
+                    arr[j]++;
                 }
+                cur = next;
             } else {
-                while(distance > 1) {
-                    cur--;
-                    arr[cur]++;
-                    distance--;
+                int next = cur - distance;
+                for(int j = next; j < cur; j++) {
+                    arr[j]++;
                 }
+                cur = next;
             }
         }
 
