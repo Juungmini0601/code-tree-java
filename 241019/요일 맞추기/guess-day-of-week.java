@@ -9,7 +9,7 @@ public class Main {
         int d2 = sc.nextInt();
 
         int ans = getTotalDay(m2, d2) - getTotalDay(m1, d1);
-        System.out.println(ans >= 0 ? getPlusDay(ans) : getMinusDay(ans));
+        System.out.println(ans >= 0 ? getPlusDay(ans % 7) : getMinusDay(ans % 7));
     }
 
     public static int getTotalDay(int m, int d) {
