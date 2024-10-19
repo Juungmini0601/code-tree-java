@@ -13,20 +13,13 @@ public class Main {
         String day = sc.next();
         int cnt = 0;
         int start = getTotalDay(m1, d1);
+        int end = getTotalDay(m2, d2);
 
-        while(true) {
-            d1++;
-            if(d1 > num_of_days[m1]) {
-                m1++;
-                d1 = 1;
-            }
-
-            int diff = (getTotalDay(m1, d1) - start) % 7;
+        for(int i = start; i <= end; i++) {
+            int diff = (i - start) % 7;
             if(getPlusDay(diff).equals(day)) {
                 cnt++;
             }
-
-            if(m1 == m2 && d1 == d2) break;
         }
 
         System.out.println(cnt);
