@@ -11,7 +11,7 @@ public class Main {
             int x2 = sc.nextInt();
 
             for(int j = x1; j < x2; j++) {
-                arr[j]++;
+                arr[j+100]++;
             }
         }
 
