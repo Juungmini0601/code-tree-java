@@ -12,13 +12,13 @@ public class Main {
             String dir = sc.next();
 
             if(dir.equals("R")) {
-                while(distance > 0) {
+                while(distance > 1) {
                     cur++;
                     arr[cur]++;
                     distance--;
                 }
             } else {
-                while(distance > 0) {
+                while(distance > 1) {
                     cur--;
                     arr[cur]++;
                     distance--;
