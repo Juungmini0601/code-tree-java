@@ -8,7 +8,7 @@ public class Main {
         int c = sc.nextInt();
 
         int ans = getTotalMiniut(a - 11, b, c) - getTotalMiniut(0, 11, 11);
-        System.out.println(ans > 0 ? ans : -1);
+        System.out.println(ans >= 0 ? ans : -1);
     }
 
     public static int getTotalMiniut(int d, int h, int m) {
