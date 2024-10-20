@@ -37,6 +37,7 @@ public class Main {
             System.out.println(String.format("%d %d", p4.y, p4.x));
             return;
         }
+        System.out.println(0);
     }
 
     // Case1. / 방향으로 올라가는 대각선 체크
