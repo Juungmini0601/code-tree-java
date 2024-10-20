@@ -51,7 +51,7 @@ public class Main {
         String d = dir;
 
         while(true) {
-            cnt++;
+            // System.out.println(String.format("[%d, %d]", curY, curX));
             if(d.equals("N")) {
                 curY = curY - 1;
             } else if (d.equals("E")) {
@@ -64,6 +64,7 @@ public class Main {
 
             if(!inRange(curX, curY, n)) break;
             d = arr[curY][curX] == '/' ? moveCase1(d) : moveCase2(d);
+            cnt++;
         }
 
         return cnt;
@@ -71,13 +72,13 @@ public class Main {
 
     // /칸에 Dir방향에서 레이저가 들어왔을 때 다음으로 이동할 칸 [y, x]
     public static String moveCase1(String dir) {
-        if(dir.equals("N")) {
+        if(dir.equals("S")) {
             // x, y를 왼쪽으로 한칸 변경
             return "W";
-        } else if(dir.equals("E")) {
+        } else if(dir.equals("W")) {
             // x, y를 아래칸으로 변경
             return "S";
-        } else if(dir.equals("S")) {
+        } else if(dir.equals("N")) {
             // x, y를 오른쪽으로 한칸 변경
             return "E";
         } else {
@@ -87,13 +88,13 @@ public class Main {
     
     // \칸에 Dir방향에서 레이저가 들어왔을 때 다음으로 이동할 칸 [y, x]
     public static String moveCase2(String dir) {
-        if(dir.equals("N")) {
+        if(dir.equals("S")) {
             // x, y를 오른으로 한칸 변경
             return "E";
-        } else if(dir.equals("E")) {
+        } else if(dir.equals("W")) {
             // x, y를 위칸으로 변경
             return "N";
-        } else if(dir.equals("S")) {
+        } else if(dir.equals("N")) {
             // x, y를 왼쪽으로 한칸 변경
             return "W";
         } else {
