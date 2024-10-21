@@ -10,18 +10,15 @@ public class Main {
             scores[i] = sc.nextInt();
             total += scores[i];
         }
-        
+        // 98163
+        // scores = new int[] {525368 ,186290 ,366998 ,362762 ,603677 ,457716 };
         int ans = Integer.MAX_VALUE;
 
         for(int i = 0; i < 5; i++) {
             for(int j = i+1; j < 6; j++) {
                 for(int k = 0; k < 5; k++) {
-                    if(i == k) {
-                        continue;
-                    }
-
                     for(int l = k+1; l < 6; l++) {
-                        if(l == j) {
+                        if(l == j || l == i || k == i || k == j) {
                             continue;
                         }
 
