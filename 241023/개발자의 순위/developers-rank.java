@@ -6,6 +6,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int k = sc.nextInt();
         int n = sc.nextInt();
+        // k = 1;
+        // n = 20;
         Developer[] developers = new Developer[n+1];
 
         for(int i = 1; i <= n; i++) {
@@ -14,7 +16,7 @@ public class Main {
         
         for(int i = 0; i < k; i++) {
             int[] arr = new int[n];
-
+            // arr = new int[]{17 ,6 ,5 ,12 ,7 ,11 ,14 ,15 ,18 ,16 ,20 ,4 ,13 ,9 ,10 ,3 ,8 ,2 ,19 ,1};
             for(int j = 0; j < n; j++) {
                 arr[j] = sc.nextInt();
             }
@@ -23,14 +25,14 @@ public class Main {
                 int number = arr[j];
 
                 for(int l = j + 1; l < n; l++) {
-                    developers[number].wins[l]++;
+                    developers[number].wins[arr[l]]++;
                 }
             }
         }
 
         int cnt = 0;
         for(int i = 1; i <= n; i++) {
-            //System.out.println(String.format("%d번의 승리 회수: %s", i, Arrays.toString(developers[i].wins)));
+            // System.out.println(String.format("%d번: %s", i, Arrays.toString(developers[i].wins)));
 
             for(int j = 1; j <= n; j++) {
                 if(j == i) {
