@@ -37,7 +37,7 @@ public class Main {
                     continue;
                 }
                 
-                if(developers[i].wins[j] == n-1) {
+                if(developers[i].wins[j] == k) {
                     cnt++;
                 }
             }
