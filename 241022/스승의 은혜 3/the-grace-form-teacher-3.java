@@ -27,6 +27,7 @@ public class Main {
 
                 arr[j] = new Student(price, ship);
             }
+            Arrays.sort(arr);
             
             int sum = 0;
             int temp = 0;
