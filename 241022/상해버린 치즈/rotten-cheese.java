@@ -49,11 +49,13 @@ public class Main {
             // System.out.println(String.format("상한치즈 후보 %d번", i));
             // i번 치즈를 먹은 사람의 수를 센다.
             int temp = 0;
+            boolean[] countedPerson = new boolean[n+1];
             for(int j = 0; j < d; j++) {
                 EatInfo eatInfo = eatInfos[j];
-                // 같은 사람이 같은 치즈를 여러번 먹은 경우는 일단 패스한다.
-                if(eatInfo.cheese == i) {
+                // 약을 주지 않았는데 치즈를 먹은 사람의 수를 센다.
+                if(eatInfo.cheese == i && !countedPerson[eatInfo.person]) {
                     temp++;
+                    countedPerson[eatInfo.person] = true;
                 }
             }
             cnt = Math.max(cnt, temp);
