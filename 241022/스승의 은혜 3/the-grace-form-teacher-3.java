@@ -15,13 +15,23 @@ public class Main {
         int cnt = 0;
 
         for(int i = 0; i < n; i++) {
-            // i번째 선물을 반값으로 바꾼다.
-            students[i].discount();
-            Arrays.sort(students);
+            // i번째 선물을 반값으로 바꾼 배열을 만든다.
+            Student[] arr = new Student[n];
+            for(int j = 0; j < n; j++) {
+                int price = students[j].price;
+                int ship = students[j].ship;
+                
+                if(j == i) {
+                    price /= 2;
+                }
+
+                arr[j] = new Student(price, ship);
+            }
+            
             int sum = 0;
             int temp = 0;
             for(int j = 0; j < n; j++) {
-                int nextSum = sum + students[j].total;
+                int nextSum = sum + arr[j].total;
                 if(nextSum > b) {
                     break;
                 }
@@ -29,7 +39,6 @@ public class Main {
                 temp++;
             }
 
-            students[i].restore();
             cnt = Math.max(cnt, temp);
         }
 
@@ -61,5 +70,10 @@ class Student implements Comparable<Student> {
     @Override
     public int compareTo(Student s) {
         return this.total - s.total;
+    }
+
+    @Override
+    public String toString() {
+        return this.total + "";
     }
 }
