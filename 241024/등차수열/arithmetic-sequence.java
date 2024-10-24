@@ -10,8 +10,9 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        int cnt = 0;
+        int ans = 0;
         for(int k = 1; k <= 100; k++) {
+            int cnt = 0;
             for(int i = 0; i < n - 1; i++) {
                 for(int j = i + 1; j < n; j++) {
                     if(arr[j] - k == k - arr[i]) {
@@ -19,8 +20,9 @@ public class Main {
                     }
                 }
             }
+            ans = Math.max(ans, cnt);
         }
 
-        System.out.println(cnt);
+        System.out.println(ans);
     }
 }
