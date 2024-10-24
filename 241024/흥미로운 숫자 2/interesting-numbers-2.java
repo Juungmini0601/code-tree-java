@@ -27,13 +27,24 @@ public class Main {
         }
 
         int cnt = 0;
+        int number1 = -1;
+        int number2 = -1;
 
         for(int i = 0; i < 10; i++) {
             if(arr[i] >= 1) {
                 cnt++;
+                if(number1 == -1) {
+                    number1 = i;
+                } else {
+                    number2 = i;
+                }
             }
         }
 
-        return cnt == 2;
+        if(cnt != 2) {
+            return false;
+        }
+
+        return arr[number1] == 1 || arr[number2] == 1;
     }
 }
