@@ -13,18 +13,18 @@ public class Main {
         a = sc.nextInt();
         b = sc.nextInt();
         c = sc.nextInt();
-        select(0);
+        
+        for(int i = 0; i <= 1000; i++) {
+            if(i * a > c) {
+                break;
+            }
+
+            int temp = (c - a * i) / b * b;
+            max = Math.max(a * i + temp, max);
+        }
+
         System.out.println(max);
     }
 
-    public static void select(int num) {
-        if(num > c) {
-            return;
-        }
-
-        max = Math.max(max, num);
-
-        select(num + a);
-        select(num + b);
-    }
+   
 }
