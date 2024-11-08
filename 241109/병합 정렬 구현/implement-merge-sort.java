@@ -1,10 +1,14 @@
 import java.util.Scanner;
 
 public class Main {
+
+    public static int[] mergedArr;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] arr = new int[n];
+        mergedArr = new int[n];
 
         for(int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
@@ -29,7 +33,7 @@ public class Main {
     }
 
     public static void merge(int[] arr, int start, int mid, int end) {
-        int[] mergedArr = new int[arr.length];
+        // int[] mergedArr = new int[arr.length];
         int i = start;
         int j = mid + 1;
         int k = i;
