@@ -24,19 +24,20 @@ public class Main {
                 int digit = (num / i) % 10; 
                 // 여기서 넣을 때 정렬 해줘야 되지 않나?
                 ArrayList<Integer> selected = list.get(digit);
-                int index = -1;
-                for(int k = 0; k < selected.size(); k++) {
-                    if(selected.get(k) > num) {
-                        index = k;
-                        break;
-                    }
-                }
+                selected.add(num);
+                // int index = -1;
+                // for(int k = 0; k < selected.size(); k++) {
+                //     if(selected.get(k) > num) {
+                //         index = k;
+                //         break;
+                //     }
+                // }
 
-                if(index == -1) {
-                    list.get(digit).add(num);
-                } else {
-                    list.get(digit).add(index, num);
-                }
+                // if(index == -1) {
+                //     list.get(digit).add(num);
+                // } else {
+                //     list.get(digit).add(index, num);
+                // }
             }
 
             ArrayList<Integer> newList = new ArrayList<>();
