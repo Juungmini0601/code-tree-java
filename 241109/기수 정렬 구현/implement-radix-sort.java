@@ -12,7 +12,7 @@ public class Main {
         }
 
         // 기수 정렬
-        for(int i = 10; i <= 1000000; i *= 10) {
+        for(int i = 1; i <= 1000000; i *= 10) {
             ArrayList<ArrayList<Integer>> list = new ArrayList<>();
 
             for(int j = 0; j < 10; j++) {
@@ -21,8 +21,7 @@ public class Main {
 
             for(int j = 0; j < n; j++) {
                 int num = arr.get(j);
-                int digit = num % i;
-                digit = digit >= 10 ? 0 : digit;
+                int digit = (num / i) % 10; 
                 // 여기서 넣을 때 정렬 해줘야 되지 않나?
                 ArrayList<Integer> selected = list.get(digit);
                 int index = -1;
