@@ -22,6 +22,7 @@ public class Main {
             for(int j = 0; j < n; j++) {
                 int num = arr.get(j);
                 int digit = num % i;
+                digit = digit >= 10 ? 0 : digit;
                 // 여기서 넣을 때 정렬 해줘야 되지 않나?
                 list.get(digit).add(num);
             }
