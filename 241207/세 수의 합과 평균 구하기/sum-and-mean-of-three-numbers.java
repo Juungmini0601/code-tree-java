@@ -14,8 +14,9 @@ public class Main {
         int c = Integer.parseInt(st.nextToken());
 
         int sum = a + b + c;
-        double avg = (double) sum / 3;
+        int avg = sum / 3;
 
-        System.out.printf("%d %.1f\n", sum, avg);
+        System.out.println(sum);
+        System.out.println(avg);
     }
 }
