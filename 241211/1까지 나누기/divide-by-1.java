@@ -23,7 +23,7 @@ public class Main {
             n /= num;
             cnt++;
 
-            if(n < 1) {
+            if(n <= 1) {
                 break;
             }
 
