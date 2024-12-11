@@ -29,8 +29,8 @@ public class Main {
         System.out.println(sb);
     }
 
-    public static void input() throws Exception {
-        st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
-    }
+    // public static void input() throws Exception {
+    //     st = new StringTokenizer(br.readLine());
+    //     n = Integer.parseInt(st.nextToken());
+    // }
 }
