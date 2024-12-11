@@ -17,7 +17,7 @@ public class Main {
             int num = Integer.parseInt(st.nextToken());
 
             if(num % 2 == 1 && num % 3 == 0) {
-                sum += i;
+                sum += num;
             }
         }
 
