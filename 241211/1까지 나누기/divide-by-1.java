@@ -21,6 +21,7 @@ public class Main {
 
         while(true) {
             n /= num;
+            cnt++;
 
             if(n < 1) {
                 break;
@@ -29,7 +30,7 @@ public class Main {
             num++;
         }
 
-        sb.append(num);
+        sb.append(cnt);
 
         System.out.println(sb);
     }
