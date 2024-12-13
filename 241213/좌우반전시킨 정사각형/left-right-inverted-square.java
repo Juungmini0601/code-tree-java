@@ -18,7 +18,7 @@ public class Main {
         
         for(int i = 1; i <= n; i++) {
             for(int j = 1; j <= n; j++) {
-                sb.append(4 * i - (j-1) * i + " ");
+                sb.append(n * i - (j-1) * i + " ");
             }
             
             sb.append("\n");
