@@ -23,11 +23,11 @@ public class Main {
                 sb.append(cur);
                 cur++;
                 
-                if(cur >= 'Z') {
+                if(cur > 'Z') {
                     cur = 'A';
                 }
             }
-            
+
             sb.append("\n");
         }
 
