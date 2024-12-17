@@ -24,7 +24,7 @@ public class Main {
             return;
         }
 
-        for(int i = 0; i < n1 - n2; i++) {
+        for(int i = 0; i <= n1 - n2; i++) {
             if(check(i)) {
                 System.out.println("Yes");
                 return;
