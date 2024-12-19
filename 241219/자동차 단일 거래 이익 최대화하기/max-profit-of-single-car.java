@@ -7,7 +7,7 @@ public class Main {
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static StringTokenizer st;
     public static int n;
-    public static int[] arr = new int[10];
+    public static int[] arr;
 
     public static void main(String[] args) throws Exception {
         input();
@@ -28,7 +28,8 @@ public class Main {
     public static void input() throws Exception {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
-
+        arr = new int[n];
+        
         st = new StringTokenizer(br.readLine());
         for(int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
