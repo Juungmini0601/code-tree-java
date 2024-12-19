@@ -11,10 +11,10 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         input();
-        int max = arr[0];
-        int max2 = arr[0];
+        int max = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
         
-        for(int i = 1; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             if(arr[i] >= max) {
                 max2 = max;
                 max = arr[i];
