@@ -41,7 +41,7 @@ public class Main {
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
 
-            for(int j = 0; j < n; j++) {
+            for(int j = 0; j < m; j++) {
                 arr1[i][j] = Integer.parseInt(st.nextToken());
             }
         }
@@ -50,7 +50,7 @@ public class Main {
         for(int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
 
-            for(int j = 0; j < n; j++) {
+            for(int j = 0; j < m; j++) {
                 arr2[i][j] = Integer.parseInt(st.nextToken());
             }
         }
