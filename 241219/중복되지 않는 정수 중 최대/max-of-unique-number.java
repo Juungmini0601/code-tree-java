@@ -22,6 +22,10 @@ public class Main {
             max = Math.max(max, num);
         }
 
+        if(max == Integer.MIN_VALUE) {
+            max = -1;
+        }
+        
         System.out.printf("%d", max);
     }
 
