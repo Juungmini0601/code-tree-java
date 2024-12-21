@@ -1,54 +1,60 @@
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        // n, m을 입력받습니다.
-        int n, m;
-        n = sc.nextInt();
-        m = sc.nextInt();
-        int count = 1;
+    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static StringTokenizer st;
+    public static int n;
+    public static int m;
+    public static int[][] arr;
 
-        // 2차원 배열을 구현합니다.
-        int[][] arr = new int[100][100];
+    public static void main(String[] args) throws Exception {
+        input();
+        StringBuilder sb = new StringBuilder();
+        int cnt = 1;
 
-        // Step 1:
-        for(int startCol = 0; startCol < m; startCol++) {
-            int currRow = 0;
-            int currCol = startCol;
+        // col에서 시작한 대각선을 기준으로 먼저 칸을 채운다.
+        for(int col = 0; col < m; col++) {
+            int curCol = col;
+            int curRow = 0;
 
-            while(currCol >= 0 && currRow < n) {
-                arr[currRow][currCol] = count;
-
-                // 변수 업데이트 :
-                currRow++;
-                currCol--;
-                count++;
+            while(curRow < n && curCol >= 0) {
+                arr[curRow][curCol] = cnt;
+                cnt++;
+                curRow++;
+                curCol--;
             }
         }
 
-        // Step 2:
-        for(int startRow = 1; startRow < n; startRow++) {
-            int currRow = startRow;
-            int currCol = m - 1;
+        // 1, m-1에서 시작한 대각선을 기준으로 칸을 채운다.
+        for(int row = 1; row < n; row++) {
+            int curCol = m-1;
+            int curRow = row;
 
-            while(currCol >= 0 && currRow < n) {
-                arr[currRow][currCol] = count;
-
-                // 변수 업데이트 :
-                currRow++;
-                currCol--;
-                count++;
+            while(curRow < n && curCol >= 0) {
+                arr[curRow][curCol] = cnt;
+                cnt++;
+                curRow++;
+                curCol--;
             }
         }
-                
-        // 출력:
-        for(int row = 0; row < n; row++) {
-            for(int col = 0; col < m; col++) {
-                System.out.print(arr[row][col] + " ");
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                sb.append(arr[i][j] + " ");
             }
-            System.out.println();
+            sb.append("\n");
         }
+
+        System.out.println(sb);
+    }
+
+    public static void input() throws Exception {
+        st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        arr = new int[n][m];
     }
 }
