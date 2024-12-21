@@ -26,6 +26,8 @@ public class Main {
             for(int col = 1; col <= row; col++) {
                 sb.append(arr[row][col]).append(" ");
             }
+            
+            sb.append("\n");
         }
 
         System.out.println(sb);
