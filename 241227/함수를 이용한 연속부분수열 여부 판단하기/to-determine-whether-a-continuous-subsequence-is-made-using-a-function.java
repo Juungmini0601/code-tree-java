@@ -41,7 +41,7 @@ public class Main {
         int n1 = arr1.length;
         int n2 = arr2.length;
 
-        if(arr1Index + n2 >= n1) return false;
+        if(arr1Index + n2 > n1) return false;
 
         for(int i = 0; i < n2; i++) {
             if(arr1[arr1Index + i] != arr2[i]) {
