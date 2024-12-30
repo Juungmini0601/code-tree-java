@@ -17,8 +17,9 @@ public class Main {
             int maxCnt = 0;
 
             for(int i = 0; i <= n - len; i++) {
-                String substring = str.substring(0, len);
+                String substring = str.substring(i, i + len);
                 int cnt = count(substring);
+                // System.out.println(substring + " " + cnt);
                 maxCnt = Math.max(maxCnt, cnt);
             }    
 
