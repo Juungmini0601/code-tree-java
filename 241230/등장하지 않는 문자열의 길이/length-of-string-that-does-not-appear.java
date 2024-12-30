@@ -14,16 +14,18 @@ public class Main {
         str = br.readLine();
 
         for(int len = 1; len <= n; len++) {
-            // System.out.println("길이가 " + len + "인 부분 문자열");
-            String substring = str.substring(0, len);
-            int cnt = count(substring);
-            // System.out.println(substring + " " + cnt);
+            int maxCnt = 0;
 
-            if(cnt < 2) {
+            for(int i = 0; i <= n - len; i++) {
+                String substring = str.substring(0, len);
+                int cnt = count(substring);
+                maxCnt = Math.max(maxCnt, cnt);
+            }    
+
+            if(maxCnt < 2) {
                 System.out.println(len);
                 return;
             }
-            
         }
     }
 
