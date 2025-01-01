@@ -22,7 +22,7 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        for(int i = 1; i <= 100; i++) {
+        for(int i = arr[0]; i <= 100; i++) {
             if(condition(i)) {
                 System.out.println(i);
                 return;
