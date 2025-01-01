@@ -26,12 +26,13 @@ public class Main {
         int answer = 0;
         // 최대 최소 계산
         for(int i = 0; i < n; i++) {
-            int diff = arr[i] - arr[0];
-            // 차이가 k보다 크다면 앞으로 계속 커지므로 멈춘다.
-            if(diff > k) {
-                break;
+            for(int j = i + 1; j < n; j++) {
+                int diff = arr[j] - arr[i];
+                
+                if(diff <= k) {
+                    answer = Math.max(answer, j - i + 1);
+                }
             }
-            answer = i + 1;
         }
 
         System.out.println(answer);
