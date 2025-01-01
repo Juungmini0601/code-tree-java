@@ -1,6 +1,7 @@
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.StringTokenizer;
+import java.util.Arrays;
 
 public class Main {
 
@@ -41,7 +42,9 @@ public class Main {
             }   
         }
 
-        if(arr[cnt-1] != n - 1) {
+        // System.out.println(maxValue + ":/ " + Arrays.toString(selected));
+
+        if(selected[cnt-1] != n - 1) {
             return false;
         }
 
@@ -50,7 +53,6 @@ public class Main {
                 return false;
             }
         }
-
         return true;
     }
 }
