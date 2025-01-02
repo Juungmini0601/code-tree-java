@@ -34,7 +34,7 @@ public class Main {
             for(int j = 1; j < n; j++) {
                 int num = sums[j-1] - selected[j-1];
                 
-                if(num <= 0 || nums[num] >= 1) {
+                if(num <= 0 || num > 1000 || nums[num] >= 1) {
                     flag = true;
                     break;
                 }
