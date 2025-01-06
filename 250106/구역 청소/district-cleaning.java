@@ -21,11 +21,11 @@ public class Main {
             if(visited[i]) cnt++;
         }
 
-        System.out.println(cnt-1);
+        System.out.println(cnt);
     }
 
     public static void visit(int start, int end) {
-        for(int i = start; i <= end; i++)
+        for(int i = start; i < end; i++)
             visited[i] = true;
     }
 }
