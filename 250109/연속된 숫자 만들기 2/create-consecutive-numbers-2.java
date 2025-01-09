@@ -16,9 +16,11 @@ public class Main {
         }
 
         int ans = 0;
-        
+        if(Math.abs(arr[0] - arr[1]) == 1 && Math.abs(arr[2] - arr[1]) == 1) {
+            ans = 0;
+        }
         // Case1 2명의 사람만 연속인 경우
-        if(Math.abs(arr[0] - arr[1]) == 1 || Math.abs(arr[2] - arr[1]) == 1 || Math.abs(arr[2] - arr[0]) == 1) {
+        else if(Math.abs(arr[0] - arr[1]) == 1 || Math.abs(arr[2] - arr[1]) == 1 || Math.abs(arr[2] - arr[0]) == 1) {
             ans = 1;
         }
         // Case2 3명의 사람이 연속이 아닌 경우
