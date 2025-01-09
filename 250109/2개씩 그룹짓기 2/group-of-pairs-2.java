@@ -15,11 +15,7 @@ public class Main {
         // 배열 정렬
         Arrays.sort(arr);
 
-        // 정렬된 배열 출력
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
+
 
         // 두 원소의 차이의 최솟값을 최대화
         long minDiff = Long.MAX_VALUE; // 최대값으로 초기화
