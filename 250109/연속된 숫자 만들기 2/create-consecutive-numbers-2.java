@@ -23,7 +23,12 @@ public class Main {
         }
         // Case2 3명의 사람이 연속이 아닌 경우
         else {
-            ans = 2;
+            if(Math.abs(arr[0] - arr[1]) == 2 || Math.abs(arr[2] - arr[0]) == 2) {
+                ans = 1;
+            } 
+            else {
+                ans = 2;
+            }
         }
 
         System.out.println(ans);
