@@ -1,38 +1,35 @@
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
+    public static final int MAX_N = 3;
 
-    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public static StringTokenizer st;
-    public static int[] arr = new int[3];
+    public static int n = MAX_N;
+    public static int[] a = new int[MAX_N];
 
-    public static void main(String[] args) throws Exception {
-        st = new StringTokenizer(br.readLine());
-        
-        for(int i = 0; i < 3; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        int ans = 0;
-        if(Math.abs(arr[0] - arr[1]) == 1 && Math.abs(arr[2] - arr[1]) == 1) {
-            ans = 0;
-        }
-        // Case1 2명의 사람만 연속인 경우
-        else if(Math.abs(arr[0] - arr[1]) == 1 || Math.abs(arr[2] - arr[1]) == 1 || Math.abs(arr[2] - arr[0]) == 1) {
-            ans = 1;
-        }
-        // Case2 3명의 사람이 연속이 아닌 경우
-        else {
-            if(Math.abs(arr[0] - arr[1]) == 2 || Math.abs(arr[2] - arr[1]) == 2) {
-                ans = 1;
-            } 
-            else {
-                ans = 2;
-            }
-        }
+        // 입력
+        for(int i = 0; i < n; i++)
+            a[i] = sc.nextInt();
 
-        System.out.println(ans);
+        // 주어진 값들을 정렬합니다.
+        Arrays.sort(a);
+
+        // Case 1. 3개의 숫자가 전부 연속한 경우
+        // 이 경우에는 이동할 필요가 없으므로
+        // 최소 이동 횟수는 0이 됩니다.
+        if(a[0] + 1 == a[1] && a[1] + 1 == a[2])
+            System.out.print(0);
+        // Case 2. 2개의 숫자의 차이가 정확히 2가 나는 경우
+        // 이 경우에는 남은 숫자를 두 숫자 사이에 바로 넣어주면 되므로
+        // 최소 이동 횟수는 1이 됩니다.
+        else if(a[0] + 2 == a[1] || a[1] + 2 == a[2])
+            System.out.print(1);
+        // Case 3. 그렇지 않은 경우에는 항상 2번에 걸쳐
+        // 3개의 숫자를 연속하게 만드는 것이 가능합니다.
+        else
+            System.out.print(2);
     }
 }
