@@ -25,9 +25,9 @@ public class Main {
 
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= n; j++) {
-				for(int k = 1; k <= MAX_K; k++) {
+				for(int k = 0; k <= MAX_K; k++) {
 					int goldCount = bfsGold(i, j, k);
-					// System.out.printf("[%d, %d] 시작 k = %d일때 금의 개수: %d\n", i, j, k, goldCount);
+					System.out.printf("[%d, %d] 시작 k = %d일때 금의 개수: %d\n", i, j, k, goldCount);
 
 					// 금을 캤을 때 손해를 안봤다면 최대 값 갱신
 					if(m * goldCount >= k * k + (k + 1) * (k + 1)) {
