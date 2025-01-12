@@ -33,7 +33,7 @@ public class Main {
 	public static boolean positiveSquare(int startX, int startY, int endX, int endY) {
 		for(int i = startX; i <= endX; i++) {
 			for(int j = startY; j <= endY; j++) {
-				if(arr[i][j] < 0) {
+				if(arr[i][j] <= 0) {
 					return false;
 				}
 			}
