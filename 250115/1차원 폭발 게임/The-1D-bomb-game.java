@@ -45,6 +45,7 @@ public class Main {
 	}
 
 	public static boolean condition() {
+		if(bombs[0] == BLANK) return false;
 		int cnt = 1;
 		boolean ret = false;
 		int startIndex = 0;
