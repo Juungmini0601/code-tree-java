@@ -68,8 +68,8 @@ public class Main {
 			cnt = 1;
 			startIndex = i;
 		}
-
-		if(cnt >= m) {
+		
+		if(endIndex >= 1 && cnt >= m) {
 			ret = true;
 			mark(bombs[endIndex-1], startIndex, endIndex);
 		}
