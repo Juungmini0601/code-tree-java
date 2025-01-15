@@ -48,7 +48,7 @@ public class Main {
 		int cnt = 1;
 		boolean ret = false;
 		int startIndex = 0;
-		int endIndex = 0;
+		int endIndex = n;
 		for(int i = 1; i < n; i++) {
 			if(bombs[i] == BLANK) {
 				endIndex = i;
@@ -68,8 +68,8 @@ public class Main {
 			cnt = 1;
 			startIndex = i;
 		}
-		
-		if(endIndex >= 1 && cnt >= m) {
+
+		if(cnt >= m) {
 			ret = true;
 			mark(bombs[endIndex-1], startIndex, endIndex);
 		}
