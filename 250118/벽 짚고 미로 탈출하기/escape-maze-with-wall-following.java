@@ -23,18 +23,9 @@ public class Main {
 		// 0 = 우측, 1 = 위쪽, 2 = 왼쪽, 3 = 아래쪽
 		int dir = 0;
 		int time = 0;
-
+		visited[dir][x][y] = true;
 
 		while (inRange(x, y)) {
-			// 이미 방문했던 경우라면 앞으로도 싸이클을 돌것이다.
-			if (visited[dir][x][y]) {
-				System.out.println(-1);
-				return;
-			}
-
-			visited[dir][x][y] = true;
-
-
 			int nx = x + dx[dir];
 			int ny = y + dy[dir];
 
@@ -80,7 +71,13 @@ public class Main {
 			}
 			// 다음 칸으로 이동할 수 없다면 회전후 한 칸 이동한다.
 			else {
+				visited[dir][x][y] = true;
 				dir = rotateLeft(dir);
+				// 회전했는데도 방문한 경우라면 안됨
+				if (visited[dir][x][y]) {
+					System.out.println(-1);
+					return;
+				}
 			}
 		}
 
