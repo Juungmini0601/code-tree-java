@@ -16,12 +16,19 @@ public class Main {
 		input();
 		int startIndex = k - 1;
 		int endIndex = startIndex + m - 1;
-		
+
 		for(int row = 0; row < n; row++) {
-			if (canShift(row, startIndex, endIndex)) continue;
-			// row - 1인 부분에 채우고 탈출
-			for(int col = startIndex; col <= endIndex; col++) {
-				arr[row-1][col] = 1;
+			if (row != n - 1 && canShift(row, startIndex, endIndex)) continue;
+
+			if (row == n - 1) {
+				for(int col = startIndex; col <= endIndex; col++) {
+					arr[row][col] = 1;
+				}
+			}
+			else {
+				for(int col = startIndex; col <= endIndex; col++) {
+					arr[row-1][col] = 1;
+				}
 			}
 
 			break;
