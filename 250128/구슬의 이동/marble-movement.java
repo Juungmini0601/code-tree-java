@@ -45,17 +45,7 @@ public class Main {
 
 		System.out.println(marbles.size());
 	}
-
-	public static void printArr() {
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				System.out.print(marbleMap[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-
+	
 	public static void simulate() {
 		move();
 		removeDuplicatedMarbles();
@@ -64,7 +54,7 @@ public class Main {
 	public static void removeDuplicatedMarbles() {
 		// marbles를 보면서 map에 marble이 몇개 있는지 표시한다.
 		marbles.forEach(marble -> marbleMap[marble.x][marble.y]++);
-		
+
 		// k개보다 작거나 같은 위치가 있는 곳이 있다면 해당 구슬은 살아 남는다.
 		List<Marble> nextMarbles = new ArrayList<>();
 		Map<String, PriorityQueue<Marble>> removeMarbleMap = new HashMap<>();
@@ -116,7 +106,7 @@ public class Main {
 				nextMarbles.add(new Marble(marble.index, nx, ny, marble.d, marble.v));
 			} else {
 				// 방향에 따라서 좌표 값이 바뀔 수 있음.
-				int[] pos = changePosition(nx, ny, marble.d);
+				int[] pos = changePosition(marble.x, marble.y, marble.d, marble.v);
 				nextMarbles.add(new Marble(marble.index, pos[0], pos[1], 3 - marble.d, marble.v));
 			}
 		}
@@ -124,31 +114,36 @@ public class Main {
 		marbles = nextMarbles;
 	}
 
-	public static int[] changePosition(int nx, int ny, int dir) {
-		int[] ret = {nx, ny};
-		int dif;
+	// TODO 충돌이 여러번 일어 날 수 있음.
+	public static int[] changePosition(int x, int y, int dir, int v) {
+		int[] ret = {x, y};
 
-		switch (dir) {
-			// 왼쪽으로 가다가 방향을 바꿔야 하면 ny 값이 0보다 작거나 같다.
-			case 0:
-				dif = 1 - ny;
-				ret[1] = 1 + dif;
-				break;
-			// 위쪽으로 가다가 방향을 바꿔야 하면 nx 값이 0보다 작거나 같다.
-			case 1:
-				dif = 1 - nx;
-				ret[0] = 1 + dif;
-				break;
-			// 아래쪽으로 가다가 방향을 바꿔야 하면 nx 값이 n보다 크다.
-			case 2:
-				dif = nx - n;
-				ret[0] = n - dif;
-				break;
-			// 오른쪽으로 가다가 방향을 바꿔야 하면 ny 값이 n보다 크다.
-			case 3:
-				dif = ny - n;
-				ret[1] = n - dif;
-				break;
+		for (int i = 0; i < v; i++) {
+			int nx = x + dx[dir];
+			int ny = y + dy[dir];
+
+			if (inRange(nx, ny)) {
+				ret[0] = nx;
+				ret[1] = ny;
+			} else {
+				// 왼쪽으로 가는 중
+				if (dir == 0) {
+					ret[1] = 2;
+				}
+				// 위쪽으로 가는중
+				else if (dir == 1) {
+					ret[0] = 2;
+				}
+				// 아래쪽으로 가는중
+				else if (dir == 3) {
+					ret[0] = n - 1;
+				}
+				// 오른쪽으로 가는중
+				else {
+					ret[1] = n - 1;
+				}
+				dir = 3 - dir;
+			}
 		}
 
 		return ret;
