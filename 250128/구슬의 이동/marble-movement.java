@@ -45,7 +45,17 @@ public class Main {
 
 		System.out.println(marbles.size());
 	}
-	
+
+	public static void printArr() {
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= n; j++) {
+				System.out.print(marbleMap[i][j] + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
 	public static void simulate() {
 		move();
 		removeDuplicatedMarbles();
@@ -54,6 +64,10 @@ public class Main {
 	public static void removeDuplicatedMarbles() {
 		// marbles를 보면서 map에 marble이 몇개 있는지 표시한다.
 		marbles.forEach(marble -> marbleMap[marble.x][marble.y]++);
+
+		// TODO 삭제
+		// System.out.println(t + " 초 [움직이기 후]");
+		// printArr();
 
 		// k개보다 작거나 같은 위치가 있는 곳이 있다면 해당 구슬은 살아 남는다.
 		List<Marble> nextMarbles = new ArrayList<>();
@@ -119,8 +133,8 @@ public class Main {
 		int[] ret = {x, y};
 
 		for (int i = 0; i < v; i++) {
-			int nx = x + dx[dir];
-			int ny = y + dy[dir];
+			int nx = ret[0] + dx[dir];
+			int ny = ret[1] + dy[dir];
 
 			if (inRange(nx, ny)) {
 				ret[0] = nx;
