@@ -19,7 +19,7 @@ public class Main {
 		for (int i = 0; i < t; i++) {
 			input();
 
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < 100; j++) {
 				move();
 			}
 
