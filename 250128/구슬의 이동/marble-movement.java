@@ -142,18 +142,22 @@ public class Main {
 			} else {
 				// 왼쪽으로 가는 중
 				if (dir == 0) {
+					ret[0] = nx;
 					ret[1] = 2;
 				}
 				// 위쪽으로 가는중
 				else if (dir == 1) {
 					ret[0] = 2;
+					ret[1] = ny;
 				}
 				// 아래쪽으로 가는중
-				else if (dir == 3) {
+				else if (dir == 2) {
 					ret[0] = n - 1;
+					ret[1] = ny;
 				}
 				// 오른쪽으로 가는중
 				else {
+					ret[0] = nx;
 					ret[1] = n - 1;
 				}
 				dir = 3 - dir;
