@@ -1,152 +1,129 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-// 코테 풀이용 코드
 public class Main {
+	static class Marble {
+		int x;
+		int y;
+		int dir;
 
-	public static int t;
-	public static int n;
-	public static int m;
-	public static int[][] arr;
-	public static Pos[][] posArr;
+		public Marble(int x, int y, int dir) {
+			this.x = x;
+			this.y = y;
+			this.dir = dir;
+		}
+	}
 
+	public static int t, n, m;
+	// 좌:0, 상:1 하 2, 우:3
+	public static int[] dx = {0, -1, 1, 0};
+	public static int[] dy = {-1, 0, 0, 1};
+	public static final int MAX_N = 50;
+	public static int[][] marbleArea;
+	public static Map<String, Integer> mapper = new HashMap<>()
+		;
+	public static List<Marble> marbles;
 	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) throws Exception {
 		t = Integer.parseInt(br.readLine());
+		mapper.put("L", 0);
+		mapper.put("U", 1);
+		mapper.put("D", 2);
+		mapper.put("R", 3);
 
 		for (int i = 0; i < t; i++) {
-			input();
+			// 입력
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			n = Integer.parseInt(st.nextToken());
+			m = Integer.parseInt(st.nextToken());
 
-			for (int j = 0; j < 100; j++) {
-				move();
+			marbleArea = new int[MAX_N + 1][MAX_N + 1];
+			marbles = new ArrayList<>();
+
+			for (int j = 0; j < m; j++) {
+				st = new StringTokenizer(br.readLine());
+				int x = Integer.parseInt(st.nextToken());
+				int y = Integer.parseInt(st.nextToken());
+				String dir = st.nextToken();
+
+				marbles.add(new Marble(x, y, mapper.get(dir)));
+				marbleArea[x][y] = 1;
 			}
 
-			int cnt = 0;
-			for (int j = 1; j <= n; j++) {
-				for (int k = 1; k <= n; k++) {
-					if (arr[j][k] == 1) {
-						cnt++;
-					}
-				}
+			for (int j = 0; j <= 2 * n; j++) {
+				simulate();
 			}
 
-			System.out.println(cnt);
+			System.out.println(marbles.size());
 		}
 	}
 
-	private static void printArr() {
+	private static void printMarbleArea() {
 		for (int i = 1; i <= n; i++) {
 			for (int j = 1; j <= n; j++) {
-				System.out.print(arr[i][j] + " ");
+				System.out.print(marbleArea[i][j] + " ");
 			}
 			System.out.println();
 		}
 	}
 
-	// Pos 배열로 표현하면 구슬이 겹치는 거를 판단하기가 까다롭다.
-	// int 배열로 표현하면 구슬의 방향정보를 가지기가 어렵다.
-	private static void move() {
-		int[][] nextArr = new int[n + 1][n + 1];
-		Pos[][] nextPosArr = new Pos[n + 1][n + 1];
+	public static void simulate() {
+		move(); // 1. 구슬을 먼저 움직인다.
+		removeDuplicatedMarble(); // 2. marbleArea의 값이 2이상인 원소를 지운다.
+	}
 
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				if (arr[i][j] != 1)
-					continue;
-				// 구슬을 새로운 배열에 움직이도록 표시한다.
-				String dir = posArr[i][j].dir;
-				int nx = i;
-				int ny = j;
-				// 방향에 따라서 좌표를 이동 시켜본다.
-				switch (dir) {
-					case "U":
-						nx--;
-						break;
-					case "D":
-						nx++;
-						break;
-					case "L":
-						ny--;
-						break;
-					case "R":
-						ny++;
-						break;
-				}
-				// 만일 좌표에 따라 이동 시켰는데 배열 바깥으로 나간 경우
-				if (nx < 1 || nx > n || ny < 1 || ny > n) {
-					// 좌표를 이동시키지 않고 반대 방향으로 바꿔준다.
-					switch (posArr[i][j].dir) {
-						case "U":
-							posArr[i][j].dir = "D";
-							break;
-						case "D":
-							posArr[i][j].dir = "U";
-							break;
-						case "L":
-							posArr[i][j].dir = "R";
-							break;
-						case "R":
-							posArr[i][j].dir = "L";
-							break;
-					}
-					nextArr[i][j] = arr[i][j];
-					nextPosArr[i][j] = posArr[i][j];
-				} else {
-					// 이동 시켜준다.
-					nextArr[nx][ny] += 1;
-					nextPosArr[nx][ny] = new Pos(nx, ny, dir);
-					arr[i][j] -= 1;
-					posArr[i][j] = null;
-				}
+	// 구슬 배열에서 구슬을 뽑아서 배열을 이동시킨다.
+	public static void move() {
+		for (int i = 0; i < marbles.size(); i++) {
+			Marble marble = marbles.get(i);
+			int nx = marble.x + dx[marble.dir];
+			int ny = marble.y + dy[marble.dir];
+
+			// 구슬이 범위 안에 있으면 이전 구슬의 위치를 제거하고 이동시킨다.
+			if (inRange(nx, ny)) {
+				Marble nextMarble = new Marble(nx, ny, marble.dir);
+				marbles.set(i, nextMarble);
+
+				marbleArea[nx][ny]++;
+				marbleArea[marble.x][marble.y]--;
 			}
-		}
-
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				if (arr[i][j] >= 2) {
-					arr[i][j] = 0;
-					posArr[i][j] = null;
-					continue;
-				}
-
-				arr[i][j] = nextArr[i][j];
-				posArr[i][j] = nextPosArr[i][j];
+			// TODO 구슬이 범위 안에 없다면 구슬의 방향을 바꾼다.
+			else {
+				Marble nextMarble = new Marble(marble.x, marble.y, 3 - marble.dir);
+				marbles.set(i, nextMarble);
 			}
 		}
 	}
 
-	private static void input() throws Exception {
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		n = Integer.parseInt(st.nextToken());
-		m = Integer.parseInt(st.nextToken());
+	// 여기서 안들어가네 구슬이 그지?
+	public static void removeDuplicatedMarble() {
+		ArrayList<Marble> nextMarbles = new ArrayList<>();
 
-		arr = new int[n + 1][n + 1];
-		posArr = new Pos[n + 1][n + 1];
-
-		for (int i = 0; i < m; i++) {
-			st = new StringTokenizer(br.readLine());
-			int x = Integer.parseInt(st.nextToken());
-			int y = Integer.parseInt(st.nextToken());
-			String dir = st.nextToken();
-
-			arr[x][y] = 1;
-			posArr[x][y] = new Pos(x, y, dir);
+		// 지워야될 구슬을 미리 빼둔다. 여기서 좌표를 수정하면 뒤에서 빼야 할 구슬이 들어갈 수 있다.
+		for (Marble marble : marbles) {
+			if (marbleArea[marble.x][marble.y] > 1) {
+				continue;
+			}
+			nextMarbles.add(marble);
 		}
+
+		// 구슬을 다 빼놨으니까 자리 업데이트 쳐준다.
+		for (Marble marble : marbles) {
+			if (marbleArea[marble.x][marble.y] > 1) {
+				marbleArea[marble.x][marble.y] = 0;
+			}
+		}
+
+		marbles = nextMarbles;
+	}
+
+	public static boolean inRange(int x, int y) {
+		return 1 <= x && x <= n && 1 <= y && y <= n;
 	}
 }
-
-class Pos {
-	int x;
-	int y;
-	String dir;
-
-	public Pos(int x, int y, String dir) {
-		this.x = x;
-		this.y = y;
-		this.dir = dir;
-	}
-}
-
-
