@@ -1,200 +1,146 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
+import java.util.Collections;
+
+class Tuple implements Comparable<Tuple> {
+    int x, y, z;
+    public Tuple(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+    @Override
+    public int compareTo(Tuple b) {
+        if(x != b.x) return x - b.x;
+        if(y != b.y) return y - b.y;
+        return z - b.z;
+    }
+}
 
 public class Main {
+    public static final int DIR_NUM = 4;
+    public static final int ASCII_NUM = 128;
+    public static final int MAX_N = 50;
+    
+    public static int n, m, t, k;
+    public static ArrayList<Tuple>[][] grid = new ArrayList[MAX_N][MAX_N];
+    public static ArrayList<Tuple>[][] nextGrid = new ArrayList[MAX_N][MAX_N];
+    
+    public static boolean inRange(int x, int y) {
+        return 0 <= x && x < n && 0 <= y && y < n;
+    }
+    
+    public static Tuple NextPos(int x, int y, int vnum, int moveDir) {
+        int[] dx = new int[]{-1, 0, 0, 1};
+        int[] dy = new int[]{0, 1, -1, 0};
+        
+        // vnum 횟수만큼 이동한 이후의 위치를 반환합니다.
+        while(vnum-- > 0) {
+            int nx = x + dx[moveDir], ny = y + dy[moveDir];
+            // 벽에 부딪히면
+            // 방향을 바꾼 뒤 이동합니다.
+            if(!inRange(nx, ny)) {
+                moveDir = 3 - moveDir;
+                nx = x + dx[moveDir]; ny = y + dy[moveDir];
+            }
+            x = nx; y = ny;
+        }
+        return new Tuple(x, y, moveDir);
+    }
+    
+    public static void moveAll() {
+        for(int x = 0; x < n; x++)
+            for(int y = 0; y < n; y++)
+                for(int i = 0; i < (int) grid[x][y].size(); i++) {
+                    int v = grid[x][y].get(i).x;
+                    int num = grid[x][y].get(i).y;
+                    int moveDir = grid[x][y].get(i).z;
+                    
+                    int nextX, nextY, nextDir;
+                    // v값이 음수이므로, -를 붙여 넘겨줍니다.
+                    nextX = NextPos(x, y, -v, moveDir).x;
+                    nextY = NextPos(x, y, -v, moveDir).y;
+                    nextDir = NextPos(x, y, -v, moveDir).z;
 
-	static class Marble {
-		int index;
-		int x;
-		int y;
-		int d;
-		int v;
+                    nextGrid[nextX][nextY].add(
+                        new Tuple(v, num, nextDir)
+                    );
+                }
+    }
+    
+    public static void selectMarbles() {
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++) 
+                if((int) nextGrid[i][j].size() >= k) {
+                    // 우선순위가 높은 k개만 남겨줍니다.
+                    Collections.sort(nextGrid[i][j]);
+                    while((int) nextGrid[i][j].size() > k)
+                        nextGrid[i][j].remove(nextGrid[i][j].size() - 1);
+                }
+    }
+    
+    public static void simulate() {
+        // Step1. nextGrid를 초기화합니다.
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                nextGrid[i][j] = new ArrayList<>();
+            
+        // Step2. 구슬들을 전부 움직입니다.
+        moveAll();
+        
+        // Step3. 각 칸마다 구슬이 최대 k개만 있도록 조정합니다.
+        selectMarbles();
+        
+        // Step4. nextGrid 값을 grid로 옮겨줍니다.
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                grid[i][j] = (ArrayList<Tuple>) nextGrid[i][j].clone();
+    }
 
-		public Marble(int index, int x, int y, int d, int v) {
-			this.index = index;
-			this.x = x;
-			this.y = y;
-			this.d = d;
-			this.v = v;
-		}
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        t = sc.nextInt();
+        k = sc.nextInt();
 
-	public static int n, m, t, k;
-	public static int[][] marbleMap;
-	public static List<Marble> marbles;
-	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-	// 0 왼쪽 1 위쪽 2 아래쪽 3오른쪽
-	// 방향전환을하고 있으면 3 - dir
-	public static int[] dx = {0, -1, 1, 0};
-	public static int[] dy = {-1, 0, 0, 1};
-	public static Map<String, Integer> mapper = new HashMap<>();
-
-	public static void main(String[] args) throws Exception {
-		input();
-
-		for (int i = 0; i < t; i++) {
-			simulate();
-		}
-
-		System.out.println(marbles.size());
-	}
-
-	public static void printArr() {
-		for (int i = 1; i <= n; i++) {
-			for (int j = 1; j <= n; j++) {
-				System.out.print(marbleMap[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-
-	public static void simulate() {
-		move();
-		removeDuplicatedMarbles();
-	}
-
-	public static void removeDuplicatedMarbles() {
-		// marbles를 보면서 map에 marble이 몇개 있는지 표시한다.
-		marbles.forEach(marble -> marbleMap[marble.x][marble.y]++);
-
-		// TODO 삭제
-		// System.out.println(t + " 초 [움직이기 후]");
-		// printArr();
-
-		// k개보다 작거나 같은 위치가 있는 곳이 있다면 해당 구슬은 살아 남는다.
-		List<Marble> nextMarbles = new ArrayList<>();
-		Map<String, PriorityQueue<Marble>> removeMarbleMap = new HashMap<>();
-
-		for (Marble marble : marbles) {
-			// 여기서 바로 수정하면 버그가 생길 가능성이 있음
-			if (marbleMap[marble.x][marble.y] <= k) {
-				nextMarbles.add(marble);
-			} else {
-				String key = marble.x + " " + marble.y;
-				if (!removeMarbleMap.containsKey(key)) {
-					removeMarbleMap.put(key, new PriorityQueue<>((a, b) -> Integer.compare(a.index, b.index)));
-				}
-
-				removeMarbleMap.get(key).add(marble);
-			}
-		}
-
-		// map의 모든 key에 대해서 큐의 원소가 k이상이면 구슬을 제거한다.
-		for (String key : removeMarbleMap.keySet()) {
-			PriorityQueue<Marble> pq = removeMarbleMap.get(key);
-
-			while (pq.size() > k) {
-				pq.poll();
-			}
-		}
-
-		// 남은 구슬을 모두 새로운 구슬주머니에 넣는다.
-		for (String key : removeMarbleMap.keySet()) {
-			PriorityQueue<Marble> pq = removeMarbleMap.get(key);
-
-			while (!pq.isEmpty()) {
-				nextMarbles.add(pq.poll());
-			}
-		}
-
-		marbles = nextMarbles;
-		marbleMap = new int[n + 1][n + 1];
-	}
-
-	public static void move() {
-		ArrayList<Marble> nextMarbles = new ArrayList<>();
-
-		for (Marble marble : marbles) {
-			int nx = marble.x + dx[marble.d] * marble.v;
-			int ny = marble.y + dy[marble.d] * marble.v;
-
-			if (inRange(nx, ny)) {
-				nextMarbles.add(new Marble(marble.index, nx, ny, marble.d, marble.v));
-			} else {
-				// 방향에 따라서 좌표 값이 바뀔 수 있음.
-				int[] pos = changePosition(marble.x, marble.y, marble.d, marble.v);
-				nextMarbles.add(new Marble(marble.index, pos[0], pos[1], 3 - marble.d, marble.v));
-			}
-		}
-
-		marbles = nextMarbles;
-	}
-
-	// TODO 충돌이 여러번 일어 날 수 있음.
-	public static int[] changePosition(int x, int y, int dir, int v) {
-		int[] ret = {x, y};
-
-		for (int i = 0; i < v; i++) {
-			int nx = ret[0] + dx[dir];
-			int ny = ret[1] + dy[dir];
-
-			if (inRange(nx, ny)) {
-				ret[0] = nx;
-				ret[1] = ny;
-			} else {
-				// 왼쪽으로 가는 중
-				if (dir == 0) {
-					ret[0] = nx;
-					ret[1] = 2;
-				}
-				// 위쪽으로 가는중
-				else if (dir == 1) {
-					ret[0] = 2;
-					ret[1] = ny;
-				}
-				// 아래쪽으로 가는중
-				else if (dir == 2) {
-					ret[0] = n - 1;
-					ret[1] = ny;
-				}
-				// 오른쪽으로 가는중
-				else {
-					ret[0] = nx;
-					ret[1] = n - 1;
-				}
-				dir = 3 - dir;
-			}
-		}
-
-		return ret;
-	}
-
-	public static boolean inRange(int x, int y) {
-		return 1 <= x && x <= n && 1 <= y && y <= n;
-	}
-
-	public static void input() throws Exception {
-		mapper.put("L", 0);
-		mapper.put("U", 1);
-		mapper.put("D", 2);
-		mapper.put("R", 3);
-
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		n = Integer.parseInt(st.nextToken());
-		m = Integer.parseInt(st.nextToken());
-		t = Integer.parseInt(st.nextToken());
-		k = Integer.parseInt(st.nextToken());
-
-		marbles = new ArrayList<>();
-		marbleMap = new int[n + 1][n + 1];
-
-		for (int i = 1; i <= m; i++) {
-			st = new StringTokenizer(br.readLine());
-
-			int x = Integer.parseInt(st.nextToken());
-			int y = Integer.parseInt(st.nextToken());
-			String dir = st.nextToken();
-			int v = Integer.parseInt(st.nextToken());
-
-			marbles.add(new Marble(i, x, y, mapper.get(dir), v));
-		}
-	}
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                grid[i][j] = new ArrayList<>();
+        
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                nextGrid[i][j] = new ArrayList<>();
+        
+        int[] dirMapper = new int[ASCII_NUM];
+        dirMapper['U'] = 0;
+        dirMapper['R'] = 1;
+        dirMapper['L'] = 2;
+        dirMapper['D'] = 3;
+        
+        for(int i = 0; i < m; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            char d = sc.next().charAt(0);
+            int v = sc.nextInt();
+            
+            // 살아남는 구슬의 우선순위가 더 빠른 속도, 더 큰 번호 이므로
+            // 정렬시 속도가 먼저 내림차순, 그 다음에는 번호가 내림차순으로 오도록
+            // (-속도, -번호, 방향) 순서를 유지합니다.
+            grid[r - 1][c - 1].add(
+                new Tuple(-v, -(i + 1), dirMapper[d])
+            );
+        }
+        
+        // t초에 걸쳐 시뮬레이션을 반복합니다.
+        while(t-- > 0)
+            simulate();
+        
+        int ans = 0;
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                ans += (int) grid[i][j].size();
+        
+        System.out.print(ans);
+    }
 }
