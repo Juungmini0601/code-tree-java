@@ -10,9 +10,15 @@ public class Main {
 	public static int cnt = 0;
 	public static int n;
 	public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static Map<Character, ArrayList<Integer>> map = new HashMap<>();
 
 	public static void main(String[] args) throws Exception {
+		map.put('1', new ArrayList<>());
+		map.put('2', new ArrayList<>());
+		map.put('3', new ArrayList<>());
+		map.put('4', new ArrayList<>());
 		n = Integer.parseInt(br.readLine());
+		
 		select(0);
 		System.out.println(cnt);
 	}
@@ -20,7 +26,7 @@ public class Main {
 	public static void select(int cur) {
 		if (cur == n) {
 			StringBuilder number = new StringBuilder();
-			;
+			
 			for (int i = 0; i < n; i++) {
 				number.append(selected[i]);
 			}
@@ -28,7 +34,12 @@ public class Main {
 			if (checkNumber(number.toString())) {
 				cnt++;
 			}
-
+			map.clear();
+			map.put('1', new ArrayList<>());
+			map.put('2', new ArrayList<>());
+			map.put('3', new ArrayList<>());
+			map.put('4', new ArrayList<>());
+			
 			return;
 		}
 
@@ -39,13 +50,6 @@ public class Main {
 	}
 
 	public static boolean checkNumber(String number) {
-		Map<Character, ArrayList<Integer>> map = new HashMap<>();
-
-		map.put('1', new ArrayList<>());
-		map.put('2', new ArrayList<>());
-		map.put('3', new ArrayList<>());
-		map.put('4', new ArrayList<>());
-
 		char beforeNumber = number.charAt(0);
 		int cnt = 1;
 
