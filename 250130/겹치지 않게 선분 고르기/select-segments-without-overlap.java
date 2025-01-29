@@ -13,14 +13,7 @@ public class Main {
 			this.start = start;
 			this.end = end;
 		}
-
-		@Override
-		public String toString() {
-			return "Line{" +
-				"start=" + start +
-				", end=" + end +
-				'}';
-		}
+		
 	}
 
 	public static int n;
@@ -36,13 +29,13 @@ public class Main {
 		int end = n;
 
 		while (ans == 0) {
-			select(0, end--);
+			select(0, end--, 0);
 		}
 
 		System.out.println(ans);
 	}
 
-	public static void select(int cur, int end) {
+	public static void select(int cur, int end, int startIdx) {
 		if (cur >= end) {
 			boolean condition = fillLine(end);
 			Arrays.fill(visited, false);
@@ -54,12 +47,12 @@ public class Main {
 			return;
 		}
 
-		for (int i = 0; i < n; i++) {
+		for (int i = startIdx; i < n; i++) {
 			if (!selectedLine[i]) {
 				selected[cur] = lines[i];
 				selectedLine[i] = true;
 
-				select(cur + 1, end);
+				select(cur + 1, end, i + 1);
 
 				selectedLine[i] = false;
 				selected[cur] = null;
