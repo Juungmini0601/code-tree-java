@@ -7,7 +7,7 @@ public class Main {
 
 	public static String expression;
 	public static int[] selected = new int[6];
-	public static int ans = 0;
+	public static int ans = Integer.MIN_VALUE;
 	public static List<Character> numbers = new ArrayList<>();
 	public static List<Character> operators = new ArrayList<>();
 
