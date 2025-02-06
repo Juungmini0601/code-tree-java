@@ -26,6 +26,7 @@ public class Main {
 
 	public static void choose(int cur) {
 		if (cur == n + 1) {
+			// System.out.println(Arrays.toString(selected) + " " + calcCost());
 			ans = Math.min(ans, calcCost());
 			return;
 		}
@@ -44,10 +45,22 @@ public class Main {
 		int cost = 0;
 
 		for (int i = 1; i <= n - 1; i++) {
-			cost += arr[selected[i]][selected[i + 1]];
+			int nextCost = arr[selected[i]][selected[i + 1]];
+
+			if (nextCost == 0) {
+				return Integer.MAX_VALUE;
+			}
+
+			cost += nextCost;
 		}
 
-		cost += arr[selected[n]][selected[1]];
+		int lastCost = arr[selected[n]][selected[1]];
+
+		if (lastCost == 0) {
+			return Integer.MAX_VALUE;
+		}
+
+		cost += lastCost;
 		return cost;
 	}
 
