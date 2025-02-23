@@ -19,6 +19,10 @@ public class Main {
 					dp[i] = Math.max(dp[i], dp[j] + 1);
 				}
 			}
+			
+			if (dp[i] == 0) {
+				dp[i] = 1;
+			}
 		}
 
 		int max = Arrays.stream(dp).max().getAsInt();
