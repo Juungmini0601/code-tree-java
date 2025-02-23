@@ -32,6 +32,10 @@ public class Main {
 	public static void find(int row, int col) {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
+				if (dp[i][j] == Integer.MIN_VALUE) {
+					continue;
+				}
+
 				if (arr[i][j] < arr[row][col]) {
 					dp[row][col] = Math.max(dp[row][col], dp[i][j] + 1);
 				}
@@ -48,6 +52,7 @@ public class Main {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				arr[i][j] = sc.nextInt();
+				dp[i][j] = Integer.MIN_VALUE;
 			}
 		}
 	}
