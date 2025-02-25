@@ -20,7 +20,7 @@ public class Main {
 
 		for (int i = 1; i <= m; i++) {
 			for (int coin : coins) {
-				if (coin <= i) {
+				if (coin <= i && dp[i - coin] != Integer.MAX_VALUE) {
 					dp[i] = Math.min(dp[i], dp[i - coin] + 1);
 				}
 			}
