@@ -26,7 +26,7 @@ public class Main {
 			}
 		}
 
-		System.out.println(dp[m]);
+		System.out.println(dp[m] == Integer.MAX_VALUE ? -1 : dp[m]);
 	}
 
 	public static void input() throws Exception {
