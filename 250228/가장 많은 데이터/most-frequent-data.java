@@ -13,7 +13,7 @@ public class Main {
 		int max = 0;
 
 		for (int i = 0; i < n; i++) {
-			String key = sc.nextLine();
+			String key = sc.next();
 			int value = map.getOrDefault(key, 0);
 			value++;
 
