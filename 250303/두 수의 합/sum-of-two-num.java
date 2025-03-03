@@ -12,31 +12,34 @@ import java.util.Scanner;
  */
 public class Main {
 	public static int n, k;
-	public static Map<Integer, Integer> map = new HashMap<>();
+	public static long[] arr;
+	public static Map<Long, Integer> map = new HashMap<>();
 
 	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		n = sc.nextInt();
 		k = sc.nextInt();
+		arr = new long[n];
 
 		for (int i = 0; i < n; i++) {
-			int value = sc.nextInt();
-			map.put(value, map.getOrDefault(value, 0) + 1);
+			long value = sc.nextLong();
+			arr[i] = value;
 		}
 
-		int cnt = 0;
-
-		for (Integer value : map.keySet()) {
-			int temp = Math.abs(k - value);
-			if (value != temp) {
-				cnt += map.get(value) * map.getOrDefault(temp, 0);
-			} else {
-				cnt += map.get(value) * (map.get(value) - 1);
+		int ans = 0;
+		
+		for(int i = 0 ; i < n; i++) {
+			long diff = k - arr[i];
+			
+			if(map.containsKey(diff)) {
+				ans += map.get(diff);
 			}
-
+			
+			// 현재 숫자의 개수를 하나 증가시켜준다.
+			map.put(arr[i], map.getOrDefault(arr[i], +1));
 		}
 
-		System.out.println(cnt / 2);
+		System.out.println(ans);
 	}
 }
