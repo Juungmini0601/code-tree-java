@@ -30,11 +30,11 @@ public class Main {
 		for (Integer value : map.keySet()) {
 			int temp = Math.abs(k - value);
 			if (value != temp) {
-				cnt += map.get(value) * map.getOrDefault(temp, 0);	
+				cnt += map.get(value) * map.getOrDefault(temp, 0);
 			} else {
-				cnt += map.get(value) * (map.get(value - 1));
+				cnt += map.get(value) * (map.get(value) - 1);
 			}
-			
+
 		}
 
 		System.out.println(cnt / 2);
