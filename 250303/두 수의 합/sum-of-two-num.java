@@ -29,7 +29,12 @@ public class Main {
 
 		for (Integer value : map.keySet()) {
 			int temp = Math.abs(k - value);
-			cnt += map.get(value) * map.getOrDefault(temp, 0);
+			if (value != temp) {
+				cnt += map.get(value) * map.getOrDefault(temp, 0);	
+			} else {
+				cnt += map.get(value) * (map.get(value - 1));
+			}
+			
 		}
 
 		System.out.println(cnt / 2);
