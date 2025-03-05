@@ -20,7 +20,7 @@ public class Main {
 		for (String word : map.keySet()) {
 			Integer count = map.getOrDefault(word, 0);
 
-			double ratio = (double) cnt / n * 100;
+			double ratio = (double) count / n * 100;
 			System.out.printf("%s %.4f\n", word, x);
 		}
 	}
