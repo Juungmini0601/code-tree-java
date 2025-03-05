@@ -21,7 +21,7 @@ public class Main {
 			Integer count = map.getOrDefault(word, 0);
 
 			double ratio = (double) count / n * 100;
-			System.out.printf("%s %.4f\n", word, x);
+			System.out.printf("%s %.4f\n", word, ratio);
 		}
 	}
 }
