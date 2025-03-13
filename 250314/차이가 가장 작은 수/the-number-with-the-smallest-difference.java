@@ -14,37 +14,27 @@ public class Main {
 	public static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		int ans = -1;
 		int n = sc.nextInt();
 		int m = sc.nextInt();
 
+		TreeSet<Integer> ts = new TreeSet<>();
 		for (int i = 0; i < n; i++) {
 			ts.add(sc.nextInt());
 		}
 
-		int first = ts.first();
-		ts.remove(first);
-
-		while (!ts.isEmpty()) {
-			Integer next = ts.ceiling(first);
-
-			if (next == null) {
-				break;
+		int ans = Integer.MAX_VALUE;  
+		for (Integer first : ts) {
+			Integer next = ts.ceiling(first + m);  
+			if (next != null) {
+				ans = Math.min(ans, next - first); 
 			}
-
-			int diff = Math.abs(next - first);
-
-			if (diff >= m) {
-				if (ans == -1) {
-					ans = diff;
-				} else {
-					ans = Math.min(diff, ans);
-				}
-			}
-
-			ts.remove(next);
 		}
 
-		System.out.println(ans);
+		if (ans == Integer.MAX_VALUE) {
+			System.out.println(-1);  
+		} else {
+			System.out.println(ans); 
+		}
 	}
+
 }
