@@ -33,7 +33,10 @@ public class Main {
 			newNode.next = this;
 
 			// 현재 노드의 참조를 변경
-			this.prev.next = newNode;
+			if (this.prev != null) {
+				this.prev.next = newNode;	
+			}
+			
 			this.prev = newNode;
 		}
 
@@ -44,7 +47,10 @@ public class Main {
 			newNode.prev = this;
 			newNode.next = this.next;
 
-			this.next.prev = newNode;
+			if (this.next != null) {
+				this.next.prev = newNode;
+			}
+			
 			this.next = newNode;
 		}
 
