@@ -27,21 +27,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		input();
-		int min = posList.get(0).x;
-		int max = posList.get(posList.size() - 1).x;
 		int ans = 0;
+		int cnt = 0;
 
-		for (int i = min; i <= max; i++) {
-			int cnt = 0;
-
-			for (Pos pos : posList) {
-				if (pos.x > i) {
-					break;
-				}
-
-				cnt += pos.v;
-			}
-
+		for (Pos pos : posList) {
+			cnt += pos.v;
 			ans = Math.max(ans, cnt);
 		}
 
