@@ -13,7 +13,13 @@ public class Main {
 		// sum >= s 보다 작거나 같은 값중 최대 값을 찾기
 		while(left <= right) {
 			long mid = (left + right) / 2;
-			long sum = (mid + 1) * mid / 2;
+			long sum;
+			if (mid % 2 == 0) {
+				sum = (mid / 2) * (mid + 1);
+			} else {
+				sum = mid * ((mid + 1) / 2);
+			}
+
 
 			if (sum > s) {
 				right = mid - 1;
