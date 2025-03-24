@@ -17,7 +17,7 @@ public class Main {
 			if (sum > s) {
 				right = mid - 1;
 			} else {
-				answer = mid;
+				answer = Math.max(answer, sum);
 				left = mid + 1;
 			}
 		}
