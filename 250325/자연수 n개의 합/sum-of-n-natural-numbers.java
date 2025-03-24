@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Main {
-	
-	public Scanner sc = new Scanner(System.in);
-	
+
+	public static Scanner sc = new Scanner(System.in);
+
 	public static void main(String[] args) {
 		long s = sc.nextLong();
 		long left = 0;
