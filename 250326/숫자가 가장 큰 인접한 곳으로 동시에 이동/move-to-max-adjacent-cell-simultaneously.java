@@ -45,10 +45,10 @@ public class Main {
 				if (nextGrid[r][c] == 0)
 					continue;
 
-				int nr = r;
-				int nc = c;
+				int nr = r + dx[0];
+				int nc = c + dy[0];
 
-				for (int dir = 0; dir < 4; dir++) {
+				for (int dir = 1; dir < 4; dir++) {
 					int tr = r + dx[dir];
 					int tc = c + dy[dir];
 
