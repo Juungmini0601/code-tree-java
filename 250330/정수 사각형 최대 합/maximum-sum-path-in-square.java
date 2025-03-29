@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -25,7 +24,7 @@ public class Main {
 		input();
 		// dp 테이블 초기화
 		for (int row = 1; row <= n; row++) {
-			for (int col = 1; col <= row; col++) {
+			for (int col = 1; col <= n; col++) {
 				dp[row][col] = Math.max(dp[row][col - 1], dp[row - 1][col]) + grid[row][col];
 			}
 		}
