@@ -28,11 +28,16 @@ public class Main {
 		dp[1][1] = arr[1];
 
 		for (int i = 2; i <= n; i++) {
-			dp[i][0] = dp[i - 2][0] + arr[i];
-
-			for (int j = 1; j <= 3; j++) {
-				// 1번 점프를 했을때, 안했을 때 중 최대 값을 찾아서 더해주기
-				dp[i][j] = Math.max(dp[i - 1][j - 1], dp[i - 2][j]) + arr[i];
+			if (i % 2 == 0) {
+				// 짝수 번째 계단인 경우 2 4 6 8 ... dp[2][0], dp[2][1] X, dp[2][2]
+				// dp[4][0] dp[4][1] X, dp[4][2], dp[4][3] X
+				// 짝수 번째 계단은 한번 점프를 0 2만 가능하네?
+				dp[i][0] = dp[i - 2][0] + arr[i];
+				dp[i][2] = Math.max(dp[i - 1][1], dp[i - 2][2]) + arr[i];
+			} else {
+				// 홀수번째 계단은 j가 1 3일때만 유효하다.
+				dp[i][1] = Math.max(dp[i - 1][0], dp[i - 2][1]) + arr[i];
+				dp[i][3] = Math.max(dp[i - 1][2], dp[i - 2][3]) + arr[i];
 			}
 		}
 	}
@@ -40,6 +45,11 @@ public class Main {
 	public static void main(String[] args) {
 		input();
 		solve();
+
+		// for (int i = 0; i < dp.length; i++) {
+		// 	System.out.println(i + "번째 계단:" + Arrays.toString(dp[i]));
+		// }
+
 		System.out.println(Arrays.stream(dp[n]).max().getAsInt());
 	}
 }
