@@ -11,10 +11,10 @@ public class Main {
 	public static void input() {
 		n = sc.nextInt();
 		k = sc.nextInt();
-		arr = new int[n];
-		sums = new int[n];
+		arr = new int[n + 1];
+		sums = new int[n + 1];
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 1; i <= n; i++) {
 			arr[i] = sc.nextInt();
 		}
 	}
@@ -22,7 +22,7 @@ public class Main {
 	public static void prefixSum() {
 		sums[0] = arr[0];
 
-		for (int i = 1; i < n; i++) {
+		for (int i = 1; i <= n; i++) {
 			sums[i] = sums[i - 1] + arr[i];
 		}
 	}
@@ -33,12 +33,8 @@ public class Main {
 
 		int max = Integer.MIN_VALUE;
 
-		for (int i = 0; i <= n - k; i++) {
-			int cur = sums[i + k - 1];
-
-			if (i != 0) {
-				cur -= sums[i - 1];
-			}
+		for (int i = 1; i <= n - k + 1; i++) {
+			int cur = sums[i + k - 1] - sums[i - 1];
 
 			max = Math.max(max, cur);
 		}
