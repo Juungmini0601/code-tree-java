@@ -25,13 +25,9 @@ public class Main {
 	public static void solve() {
 		int ans = Integer.MIN_VALUE;
 
+		int temp = 0;
 		for (int i = 1; i <= MAX; i++) {
-			int temp = 0;
-
-			for (int j = 0; j < i; j++) {
-				temp += checked[j];
-			}
-
+			temp += checked[i];
 			ans = Math.max(ans, temp);
 		}
 
