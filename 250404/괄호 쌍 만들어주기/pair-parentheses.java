@@ -3,13 +3,13 @@ import java.util.Scanner;
 public class Main {
 
 	public static String str;
-	public static int[] a;
+	public static long[] a;
 
 	public static Scanner sc = new Scanner(System.in);
 
 	public static void input() {
 		str = sc.nextLine();
-		a = new int[str.length()];
+		a = new long[str.length()];
 
 		for (int i = str.length() - 1; i >= 0; i--) {
 			if (i == str.length() - 1) {
@@ -26,7 +26,7 @@ public class Main {
 	}
 
 	public static void solve() {
-		int cnt = 0;
+		long cnt = 0;
 		for (int i = 1; i < a.length; i++) {
 			String sub = str.substring(i - 1, i + 1);
 			if ("((".equals(sub)) {
