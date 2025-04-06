@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-	public static int s;
+	public static long s;
 
 	public static Scanner sc = new Scanner(System.in);
 
@@ -11,14 +11,14 @@ public class Main {
 
 	// 합이 S이하인 경우 중 N의 최대 값
 	// 합이 S보다 큰 경우 중 최소값 -1해주면 될 듯
-	public static int search() {
-		int left = 0;
-		int right = s;
-		int minValue = s;
+	public static long search() {
+		long left = 0;
+		long right = s;
+		long minValue = s;
 
 		while (left <= right) {
-			int mid = (left + right) / 2;
-			int tempSum = mid * (mid + 1) / 2;
+			long mid = (left + right) / 2;
+			long tempSum = mid * (mid + 1) / 2;
 
 			if (tempSum > s) {
 				right = mid - 1;
@@ -33,7 +33,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		input();
-		int value = search();
+		long value = search();
 		System.out.println(value - 1);
 	}
 }
