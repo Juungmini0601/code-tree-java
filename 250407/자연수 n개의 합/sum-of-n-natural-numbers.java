@@ -22,13 +22,13 @@ public class Main {
 
 			if (tempSum <= s) {
 				left = mid + 1;
-				minValue = Math.max(minValue, mid);
+				minValue = Math.max(maxNum, mid);
 			} else {
 				right = mid -1;
 			}
 		}
 
-		return minValue;
+		return maxNum;
 	}
 
 	public static void main(String[] args) {
