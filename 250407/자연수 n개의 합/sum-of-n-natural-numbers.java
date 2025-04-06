@@ -12,9 +12,9 @@ public class Main {
 	// 합이 S이하인 경우 중 N의 최대 값
 	// 합이 S보다 큰 경우 중 최소값 -1해주면 될 듯
 	public static long search() {
-		long left = 0;
+		long left = 1;
 		long right = s;
-		long minValue = s;
+		long minValue = 0;
 
 		while (left <= right) {
 			long mid = (left + right) / 2;
@@ -22,7 +22,7 @@ public class Main {
 
 			if (tempSum <= s) {
 				left = mid + 1;
-				minValue = Math.min(minValue, mid);
+				minValue = Math.max(minValue, mid);
 			} else {
 				right = mid -1;
 			}
