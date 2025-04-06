@@ -6,7 +6,7 @@ public class Main {
 	public static Scanner sc = new Scanner(System.in);
 
 	public static void input() {
-		s = sc.nextInt();
+		s = sc.nextLong();
 	}
 
 	// 합이 S이하인 경우 중 N의 최대 값
