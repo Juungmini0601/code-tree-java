@@ -13,7 +13,7 @@ public class Main {
 	// 합이 S보다 큰 경우 중 최소값 -1해주면 될 듯
 	public static long search() {
 		long left = 1;                          
-        long right = 2 * s;                     
+        long right = 2000000000;                     
         long maxNum = 0;   
 
 		while (left <= right) {
