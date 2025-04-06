@@ -20,11 +20,11 @@ public class Main {
 			long mid = (left + right) / 2;
 			long tempSum = mid * (mid + 1) / 2;
 
-			if (tempSum > s) {
-				right = mid - 1;
+			if (tempSum <= s) {
+				left = mid + 1;
 				minValue = Math.min(minValue, mid);
 			} else {
-				left = mid + 1;
+				right = mid -1;
 			}
 		}
 
@@ -34,6 +34,6 @@ public class Main {
 	public static void main(String[] args) {
 		input();
 		long value = search();
-		System.out.println(value - 1);
+		System.out.println(value);
 	}
 }
