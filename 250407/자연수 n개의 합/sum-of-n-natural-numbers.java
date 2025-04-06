@@ -22,7 +22,7 @@ public class Main {
 
 			if (tempSum <= s) {
 				left = mid + 1;
-				minValue = Math.max(maxNum, mid);
+				maxNum = Math.max(maxNum, mid);
 			} else {
 				right = mid -1;
 			}
