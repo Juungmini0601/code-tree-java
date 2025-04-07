@@ -38,6 +38,7 @@ public class Main {
 	public static int n, m;
 	public static Map<Integer, List<Edge>> graph = new HashMap<>();
 	public static int[] dist;
+	public static boolean[] visited;
 
 	public static Scanner sc = new Scanner(System.in);
 
@@ -45,6 +46,7 @@ public class Main {
 		n = sc.nextInt();
 		m = sc.nextInt();
 		dist = new int[n + 1];
+		visited = new boolean[n + 1];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 
 		for (int i = 0; i < m; i++) {
@@ -65,19 +67,19 @@ public class Main {
 		PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
 		dist[start] = 0;
 
-		for (int i = 1; i <= n; i++) {
-			pq.offer(new int[] {i, dist[i]});
-		}
+		pq.offer(new int[] {start, 0});
 
 		while (!pq.isEmpty()) {
 			int[] cur = pq.poll();
 			int v = cur[0];
 			List<Edge> edges = graph.get(v);
 
-			if (edges == null) {
+			if (edges == null || visited[v]) {
 				continue;
 			}
-			
+
+			visited[v] = true;
+
 			for (Edge edge : edges) {
 				int next = edge.end;
 				int nextDist = dist[v] + edge.weight;
