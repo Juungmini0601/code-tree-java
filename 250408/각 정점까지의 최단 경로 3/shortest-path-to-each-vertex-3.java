@@ -74,6 +74,10 @@ public class Main {
 			int v = cur[0];
 			List<Edge> edges = graph.get(v);
 
+			if (edges == null) {
+				continue;
+			}
+			
 			for (Edge edge : edges) {
 				int next = edge.end;
 				int nextDist = dist[v] + edge.weight;
