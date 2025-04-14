@@ -21,32 +21,21 @@ public class Main {
 
 	// permutations에 있는 값이 아름 다운 수 인지 확인
 	public static boolean check() {
-		int cnt = 1;
-		int num = permutations.get(0);
-
-		for (int i = 1; i < permutations.size(); i++) {
-			int cur = permutations.get(i);
-
-			if (cur == num) {
-				cnt++;
-				continue;
-			}
-
-			// 이전 값과 현재 값이 다를 경우 그 전 숫자가 아름 다운 수의 조건에 맞았는지 확인
-			if (cnt % num == 0) {
-				cnt = 1;
-				num = cur;
-			} else {
+		// 시작점의 위치를 잡는다.
+		for (int i = 0; i < permutations.size(); i += permutations.get(i)) {
+			// 현재 위치에서 현재 값 만큼 연속이라고 했을때 사이즈를 넘어가면 아름다운 수가 아니다.
+			if (i + permutations.get(i) - 1 >= n) {
 				return false;
 			}
+			
+			for(int j = i; j < i + permutations.get(i); j++) {
+				if (permutations.get(i) != permutations.get(j)) {
+					return false;
+				}
+			}
 		}
-
-		// 마지막 숫자에 대한 판단.
-		if (cnt % num == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		
+		return true;
 	}
 
 	public static void select(int cur) {
