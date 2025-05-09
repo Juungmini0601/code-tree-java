@@ -1,14 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
+
+	public static int[] newArr;
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		int[] arr = new int[n];
+		newArr = new int[arr.length];
 		for (int i = 0; i < n; i++) {
 			arr[i] = sc.nextInt();
 		}
-		
+
 		merge_sort(arr, 0, arr.length - 1);
 		for (int elem : arr) {
 			System.out.print(elem + " ");
@@ -25,7 +29,6 @@ public class Main {
 	}
 
 	public static void merge(int[] arr, int low, int mid, int high) {
-		int[] newArr = new int[arr.length];
 		int left = low;
 		int right = mid + 1;
 		int cur = low;
