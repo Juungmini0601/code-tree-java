@@ -23,20 +23,24 @@ public class Main {
 		ListIterator<Character> iterator = list.listIterator(list.size());
 
 		for(int i = 0; i < m; i++) {
-			String command = scanner.nextLine();
-			if (command.charAt(0) == 'L') {
-				if (iterator.hasPrevious()) iterator.previous();
-			} else if (command.charAt(0) == 'R') {
-				if (iterator.hasNext()) iterator.next();
-			} else if (command.charAt(0) == 'D') {
-				if (iterator.hasNext()) {
-					iterator.next();
-					iterator.remove();
-				}
-			} else {
-				char c = command.split(" ")[1].charAt(0);
-				iterator.add(c);
-			}
+			char c = sc.next().charAt(0);
+            if(c == 'L') {
+                if(it.hasPrevious()) {
+                    it.previous();
+                }
+            } else if(c == 'R') {
+                if(it.hasNext()) {
+                    it.next();
+                }
+            } else if(c == 'D') {
+                if(it.hasNext()) {
+                    it.next();
+                    it.remove();
+                }
+            } else {
+                char newC = sc.next().charAt(0);
+                it.add(newC);
+            }
 		}
 
 		for(char c: list) {
