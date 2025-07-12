@@ -5,10 +5,12 @@ public class Main {
 	public static Scanner sc = new Scanner(System.in);
 	public static int n;
 	public static int[] arr;
-
+	public static int[] merged_arr;
+	
 	public static void main(String[] args) {
 		n = sc.nextInt();
 		arr = new int[n];
+		merged_arr = new int[n];
 
 		for(int i = 0; i < n; i++ ) {
 			arr[i] = sc.nextInt();
@@ -33,7 +35,6 @@ public class Main {
 		int i = low;
 		int j = mid + 1;
 		int k = low;
-		int[] merged_arr = new int[n];
 
 		while (i <= mid && j <= high) {
 			if (arr[i] <= arr[j]) {
