@@ -25,21 +25,21 @@ public class Main {
 		for(int i = 0; i < m; i++) {
 			char c = sc.next().charAt(0);
             if(c == 'L') {
-                if(it.hasPrevious()) {
-                    it.previous();
+                if(iterator.hasPrevious()) {
+                    iterator.previous();
                 }
             } else if(c == 'R') {
-                if(it.hasNext()) {
-                    it.next();
+                if(iterator.hasNext()) {
+                    iterator.next();
                 }
             } else if(c == 'D') {
-                if(it.hasNext()) {
-                    it.next();
-                    it.remove();
+                if(iterator.hasNext()) {
+                    iterator.next();
+                    iterator.remove();
                 }
             } else {
-                char newC = sc.next().charAt(0);
-                it.add(newC);
+                char newC = scanner.next().charAt(0);
+                iterator.add(newC);
             }
 		}
 
