@@ -23,7 +23,7 @@ public class Main {
 		ListIterator<Character> iterator = list.listIterator(list.size());
 
 		for(int i = 0; i < m; i++) {
-			char c = sc.next().charAt(0);
+			char c = scanner.next().charAt(0);
             if(c == 'L') {
                 if(iterator.hasPrevious()) {
                     iterator.previous();
