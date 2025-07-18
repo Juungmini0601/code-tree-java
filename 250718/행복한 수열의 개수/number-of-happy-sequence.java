@@ -32,8 +32,8 @@ public class Main {
 	}
 
 	public static int rowCheck(int row) {
-		int max = 0;
-		int cnt = 0;
+		int max = 1;
+		int cnt = 1;
 
 		for(int col = 1; col < n; col++) {
 			if (grid[row][col-1] == grid[row][col]) {
