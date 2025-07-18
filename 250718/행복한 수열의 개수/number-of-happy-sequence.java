@@ -49,8 +49,8 @@ public class Main {
 	}
 
 	public static int colCheck(int col) {
-		int max = 0;
-		int cnt = 0;
+		int max = 1;
+		int cnt = 1;
 
 		for(int row = 1; row < n; row++) {
 			if (grid[row-1][col] == grid[row][col]) {
