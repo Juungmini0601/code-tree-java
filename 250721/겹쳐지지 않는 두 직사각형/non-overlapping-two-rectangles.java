@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Main {
 
@@ -7,7 +6,7 @@ public class Main {
     public static int[][] grid;
     public static int n, m;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         input();
         int maxSum = Integer.MIN_VALUE;
 
@@ -38,10 +37,10 @@ public class Main {
 
         int maxSubSquareSum = Integer.MIN_VALUE;
 
-        for (int startX2 = 1; startX2 <= n; startX2++) {
-            for (int startY2 = 1; startY2 <= m; startY2++) {
-                for (int endX2 = startX2; endX2 <= n; endX2++) {
-                    for (int endY2 = startY2; endY2 <= m; endY2++) {
+        for (int startX2 = 0; startX2 < n; startX2++) {
+            for (int startY2 = 0; startY2 < m; startY2++) {
+                for (int endX2 = startX2; endX2 < n; endX2++) {
+                    for (int endY2 = startY2; endY2 < m; endY2++) {
                         int subSquareSum = getSum(startX2, endX2, startY2, endY2, visited);
                         if (subSquareSum == Integer.MIN_VALUE) {
                             continue;
@@ -71,7 +70,7 @@ public class Main {
         return sum;
     }
 
-    public static void input() throws Exception {
+    public static void input() {
         n = sc.nextInt();
         m = sc.nextInt();
         grid = new int[n][m];
