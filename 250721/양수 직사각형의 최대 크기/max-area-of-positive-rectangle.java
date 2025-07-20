@@ -9,12 +9,12 @@ public class Main {
 
     public static void main(String[] args) {
         input();
-        int ans = -1;
+        int ans = 0;
 
         for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+            for(int j = 0; j < m; j++) {
                 for(int k = i; k < n; k++) {
-                    for(int l = j; l < n; l++) {
+                    for(int l = j; l < m; l++) {
                         if (isPositiveSquare(i, j, k, l)) {
                             ans = Math.max(ans, (k - i + 1) * (l - j + 1));
                         }
