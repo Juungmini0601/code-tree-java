@@ -43,7 +43,7 @@ public class Main {
 
         for (int i = 1; i < n; i++) {
             if (arr[i] == EMPTY) {
-                return flag;
+                break;
             }
 
             if (arr[i] == arr[i - 1]) {
