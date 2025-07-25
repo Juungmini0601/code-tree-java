@@ -32,7 +32,7 @@ public class Main {
             System.out.println(arr[i]);
         }
     }
-    
+
 
     // 배열을 순회하면서 M개 이상 연속인 숫자를 찾아서, 마킹하기
     public static boolean check() {
@@ -43,13 +43,6 @@ public class Main {
 
         for (int i = 1; i < n; i++) {
             if (arr[i] == EMPTY) {
-                if (cnt >= m) {
-                    flag = true;
-                    for (int j = startIndex; j < n; j++) {
-                        arr[j] = MARK;
-                    }
-                }
-
                 return flag;
             }
 
