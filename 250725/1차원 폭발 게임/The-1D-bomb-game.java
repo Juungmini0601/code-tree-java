@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Main {
 
     public static int[] arr;
-    public static int[] temp;
     public static int n, m;
     public static final int EMPTY = 0;
     public static final int MARK = -1;
@@ -14,7 +13,16 @@ public class Main {
         input();
 
         while (check()) {
-            bomb();
+            int[] temp = new int[n];
+            int tempIndex = 0;
+
+            for(int i = 0; i < n; i++) {
+                if(arr[i] != MARK && arr[i] != EMPTY) {
+                    temp[tempIndex++] = arr[i];
+                }
+            }
+
+            arr = temp;
         }
 
         long count = Arrays.stream(arr).filter(elem -> elem > 0).count();
@@ -24,23 +32,7 @@ public class Main {
             System.out.println(arr[i]);
         }
     }
-
-    public static void bomb() {
-        int tempIndex = 0;
-
-        for(int i = 0; i < n; i++) {
-            if(arr[i] != MARK && arr[i] != EMPTY) {
-                temp[tempIndex++] = arr[i];
-            }
-        }
-
-        for (int i = tempIndex; i < n; i++) {
-            temp[i] = EMPTY;
-        }
-
-        System.arraycopy(temp, 0, arr, 0, n);
-        Arrays.fill(temp, EMPTY);
-    }
+    
 
     // 배열을 순회하면서 M개 이상 연속인 숫자를 찾아서, 마킹하기
     public static boolean check() {
@@ -93,7 +85,6 @@ public class Main {
         n = sc.nextInt();
         m = sc.nextInt();
         arr = new int[n];
-        temp = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
