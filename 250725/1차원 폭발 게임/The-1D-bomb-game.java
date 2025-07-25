@@ -41,6 +41,10 @@ public class Main {
         int startIndex = 0;
         int cnt = 1;
 
+        if (arr[0] == EMPTY) {
+            return false;
+        }
+
         for (int i = 1; i < n; i++) {
             if (arr[i] == EMPTY) {
                 break;
