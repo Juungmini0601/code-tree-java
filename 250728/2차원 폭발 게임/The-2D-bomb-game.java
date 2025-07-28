@@ -16,7 +16,16 @@ public class Main {
         input();
 
         for(int i = 0; i < k; i++) {
-            bomb();
+            while (bomb()) {
+                shift();
+            }
+
+            rotate();
+            shift();
+
+            while (bomb()) {
+                shift();
+            }
         }
 
         int count = 0;
@@ -67,25 +76,18 @@ public class Main {
         grid = temp;
     }
 
-    public static void bomb() {
-        boolean isShift = false;
+    public static boolean bomb() {
+        int bomCount = 0;
 
-        do {
-            for (int c = 0; c < n; c++) {
-                isShift = mark(c);
+        for(int c = 0; c < n; c++) {
+            if (mark(c)) {
+                bomCount++;
             }
+        }
 
-            shift();
-            rotate();
-            shift();
-
-            for (int c = 0; c < n; c++) {
-                isShift = mark(c);
-            }
-
-            shift();
-        } while (isShift);
+        return bomCount > 0;
     }
+
     // 해당 열에 동일한 숫자가 M개 이상 연속으로 있으면 마킹
     public static boolean mark(int col) {
         int beforeIndex = 0;
