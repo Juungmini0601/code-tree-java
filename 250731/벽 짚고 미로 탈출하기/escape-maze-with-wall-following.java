@@ -41,6 +41,12 @@ public class Main {
             // 현재 바라보고 있는 방향으로 이동이 불가능하다면
             if (grid[nx][ny] == 1) {
                 d = rotateLeft(d);
+                if (visited[d][x][y]) {
+                    System.out.println(-1);
+                    return;
+                }
+
+                visited[d][x][y] = true;
                 continue;
             }
             // 현재 바라보고 있는 방향으로 이동이 가능하다면 먼저 이전에 같은 방향으로 같은 좌표에 온적이 있는지 확인
