@@ -32,8 +32,8 @@ public class Main {
 
         for(int sx1 = 0; sx1 < n; sx1++) {
             for(int sy1 = 0; sy1 < n; sy1++) {
-                for(int sx2 = sx1; sx2 < n; sx2++) {
-                    for(int sy2 = sy1; sy2 < n; sy2++) {
+                for(int sx2 = 0; sx2 < n; sx2++) {
+                    for(int sy2 = 0; sy2 < n; sy2++) {
                         if(possible(sx1, sy1, sx2, sy2)) {
                             ans = Math.max(ans, findMax(sx1, sy1) + findMax(sx2, sy2));
                         }
