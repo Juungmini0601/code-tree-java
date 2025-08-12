@@ -19,9 +19,21 @@ public class Main {
         if(cnt == n) {
             int totalCost = 0;
             for(int i = 0; i < selected.size() - 1; i++) {
-                totalCost += cost[selected.get(i)][selected.get(i + 1)];
+                int curCost = cost[selected.get(i)][selected.get(i + 1)];
+                if (curCost == 0) {
+                    return;
+                }
+
+                totalCost += curCost;
             }
-            totalCost += cost[selected.get(selected.size() - 1)][selected.get(0)];
+            int lastPos = selected.get(selected.size() - 1);
+            int additionalCost = cost[lastPos][0];
+            
+            if (additionalCost == 0) {
+                return;
+            }
+
+            totalCost += additionalCost;
             ans = Math.min(ans, totalCost);
             return;
         }
@@ -45,7 +57,9 @@ public class Main {
                 cost[i][j] = sc.nextInt();
             }
         }
-        findMin(0);
+        visited[0] = true;
+        selected.add(0);
+        findMin(1);
         System.out.println(ans);
     }
 }
