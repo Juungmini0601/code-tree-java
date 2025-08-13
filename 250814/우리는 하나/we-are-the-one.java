@@ -86,7 +86,7 @@ public class Main {
         
         if(idx == n * n) {
             if(cnt == k)
-                ans = Math.max(ans, calc());
+                simulate()
             return;
         }
 
