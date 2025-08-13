@@ -81,12 +81,15 @@ public class Main {
     }
 
     public static void combination(int idx, int cnt) {
-         if(cnt > k)
+        if (cnt > k) {
             return;
-        
-        if(idx == n * n) {
-            if(cnt == k)
+        }
+
+        if (idx == cityPos.size()) {
+            if (cnt == k) {
                 simulate();
+                return;
+            }
             return;
         }
 
